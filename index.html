@@ -3,33 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SATNER Portfolio</title>
+    <title>SEAN Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header" id="main-header">
-        <div class="container header-container">
-            <div class="logo">SATNER<span>.</span></div>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav class="main-nav" id="main-nav">
-                <a href="#home" class="active">Home</a>
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#projects">Portfolio</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
-            </nav>
+<header class="main-header" id="main-header">
+    <div class="container header-container">
+        <!-- Logo with animated gradient -->
+        <div class="logo">
+            <div class="logo-gradient">SEAN<span class="logo-dot">.</span></div>
+            <div class="logo-glow"></div>
         </div>
-    </header>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+            <span class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav" id="main-nav">
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                    <span class="nav-hover"></span>
+                </a>
+                <a href="#about" class="nav-link">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span class="nav-text">About</span>
+                    <span class="nav-hover"></span>
+                </a>
+                <a href="#services" class="nav-link">
+                    <i class="fas fa-code nav-icon"></i>
+                    <span class="nav-text">Services</span>
+                    <span class="nav-hover"></span>
+                </a>
+                <a href="#projects" class="nav-link">
+                    <i class="fas fa-briefcase nav-icon"></i>
+                    <span class="nav-text">Portfolio</span>
+                    <span class="nav-hover"></span>
+                </a>
+                <a href="#blog" class="nav-link">
+                    <i class="fas fa-blog nav-icon"></i>
+                    <span class="nav-text">Blog</span>
+                    <span class="nav-hover"></span>
+                </a>
+                <a href="#contact" class="nav-link">
+                    <i class="fas fa-envelope nav-icon"></i>
+                    <span class="nav-text">Contact</span>
+                    <span class="nav-hover"></span>
+                </a>
+            </div>
+        </nav>
+        
+        <!-- CTA Button -->
+        <a href="#contact" class="header-cta">
+            <i class="fas fa-paper-plane"></i>
+            <span>Hire Me</span>
+        </a>
+    </div>
+</header>
+
+<style>
+/* Header Styles */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-header.scrolled {
+    padding: 0.7rem 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(123, 97, 255, 0.2);
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+/* Logo Styles */
+.logo {
+    position: relative;
+    z-index: 2;
+}
+
+.logo-gradient {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #7b61ff, #ff6b6b, #4dabf7);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 3s ease infinite;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-dot {
+    color: #7b61ff;
+    -webkit-text-fill-color: #7b61ff;
+    animation: pulseDot 2s ease infinite;
+}
+
+.logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(123, 97, 255, 0.3) 0%, transparent 70%);
+    filter: blur(15px);
+    z-index: 1;
+    opacity: 0.6;
+}
+
+@keyframes gradientFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Navigation Styles */
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.nav-link .nav-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-link .nav-text {
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.nav-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(123, 97, 255, 0.1), rgba(255, 107, 107, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    border-radius: 50px;
+}
+
+.nav-link:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+.nav-link:hover .nav-icon {
+    transform: scale(1.1);
+    color: #7b61ff;
+}
+
+.nav-link:hover .nav-hover {
+    opacity: 1;
+}
+
+.nav-link.active {
+    background: linear-gradient(45deg, rgba(123, 97, 255, 0.2), rgba(255, 107, 107, 0.2));
+    color: white;
+    box-shadow: 0 5px 15px rgba(123, 97, 255, 0.2);
+}
+
+.nav-link.active .nav-icon {
+    color: #7b61ff;
+}
+
+/* CTA Button */
+.header-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(45deg, #7b61ff, #ff6b6b);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(123, 97, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.header-cta:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff6b6b, #7b61ff);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.header-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(123, 97, 255, 0.4);
+}
+
+.header-cta:hover:before {
+    opacity: 1;
+}
+
+.header-cta i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.header-cta:hover i {
+    transform: translateX(3px);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.menu-icon {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 20px;
+}
+
+.menu-icon span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.menu-icon span:nth-child(1) {
+    top: 0;
+}
+
+.menu-icon span:nth-child(2) {
+    top: 9px;
+    width: 80%;
+}
+
+.menu-icon span:nth-child(3) {
+    top: 18px;
+}
+
+.mobile-menu-btn.active .menu-icon span:nth-child(1) {
+    transform: rotate(45deg);
+    top: 9px;
+}
+
+.mobile-menu-btn.active .menu-icon span:nth-child(2) {
+    opacity: 0;
+    width: 0;
+}
+
+.mobile-menu-btn.active .menu-icon span:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 9px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .header-container {
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        padding: 0.7rem 1.2rem;
+    }
+    
+    .header-cta {
+        padding: 0.7rem 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 6rem 2rem 2rem;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        border-left: 1px solid rgba(123, 97, 255, 0.2);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .main-nav.active {
+        right: 0;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        padding: 0;
+        gap: 0.5rem;
+    }
+    
+    .nav-link {
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .header-cta {
+        display: none;
+    }
+    
+    .logo-gradient {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-gradient {
+        font-size: 1.6rem;
+    }
+    
+    .main-nav {
+        width: 85%;
+    }
+}
+</style>
+
+
 
     <!-- Main Content -->
     <main>
-        <!-- Hero Section with Local Video Background -->
+        <!-- Hero Section with Video Background -->
         <section class="hero-section" id="home">
             <!-- Local Video Background -->
             <video autoplay muted loop playsinline class="hero-video-bg" id="hero-video">
@@ -40,8 +421,8 @@
             
             <!-- Fallback image (shown if video fails) -->
             <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" 
-                 alt="Background fallback" 
-                 class="video-fallback">
+                alt="Background fallback" 
+                class="video-fallback">
             
             <!-- Dark overlay for better text readability -->
             <div class="hero-overlay"></div>
@@ -62,16 +443,41 @@
                             <i class="fas fa-briefcase"></i> Hire Me
                         </a>
                         <a href="assets/Patrick-Agtang-CV.pdf" 
-                           class="btn btn-outline" 
-                           id="download-cv-btn">
+                        class="btn btn-outline" 
+                        id="download-cv-btn">
                             <i class="fas fa-download"></i> Download CV
                         </a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="image/image.jpg" 
-                         alt="Patrick Agtang - Web Developer"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80';">
+                    <div class="cube-container">
+                        <!-- Front - Use your main image here -->
+                        <div class="cube-face">
+                            <img src="image/image.jpg" 
+                                alt="Patrick Agtang - Web Developer"
+                                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80';">
+                        </div>
+                        <!-- Back - Different angle/related image -->
+                        <div class="cube-face">
+                            <img src="image/image2.jpg" alt="Portrait">
+                        </div>
+                        <!-- Right - Coding/work related -->
+                        <div class="cube-face">
+                            <img src="image/image3.jpg"  alt="Web Developer">
+                        </div>
+                        <!-- Left - Professional shot -->
+                        <div class="cube-face">
+                            <img src="image/image4.jpg"  alt="Professional">
+                        </div>
+                        <!-- Top - Tech/creative image -->
+                        <div class="cube-face">
+                            <img src="image/image.jpg"  alt="Technology">
+                        </div>
+                        <!-- Bottom - Portfolio/design image -->
+                        <div class="cube-face">
+                            <img src="image/image.jpg"  alt="Design">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -106,13 +512,13 @@
                         <h4>Experience</h4>
                         <div class="timeline">
                             <div class="timeline-item">
-                                <div class="timeline-date">2023 - Present</div>
+                                <div class="timeline-date">2025 - Present</div>
                                 <h5>Freelance Web Developer</h5>
                                 <p>Building websites and web applications for small businesses and personal projects.</p>
                             </div>
                             <div class="timeline-item">
-                                <div class="timeline-date">2022 - 2023</div>
-                                <h5>Computer Science Student</h5>
+                                <div class="timeline-date">2023 - 2028</div>
+                                <h5>Information Tech Student</h5>
                                 <p>Studied web development fundamentals, algorithms, and software engineering principles.</p>
                             </div>
                         </div>
@@ -285,8 +691,8 @@
                 </video>
                 <!-- Fallback image in case video doesn't load -->
                 <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" 
-                     alt="Contact background fallback" 
-                     class="contact-video-fallback">
+                    alt="Contact background fallback" 
+                    class="contact-video-fallback">
                 <!-- Overlay for better text readability -->
                 <div class="contact-video-overlay"></div>
             </div>
@@ -393,7 +799,7 @@
                 </a>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 SATNER. All rights reserved.</p>
+                <p>&copy; 2025 SEAN. All rights reserved.</p>
                 <p class="footer-links">
                     <a href="#home">Home</a> | 
                     <a href="#about">About</a> | 
