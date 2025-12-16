@@ -1,7 +1,140 @@
 // Main JavaScript for SATNER Portfolio
 document.addEventListener('DOMContentLoaded', function() {
     // ======================
-    // MOBILE NAVIGATION MENU
+    // INTERACTIVE 3D CUBE
+    // ======================
+    const cubeContainer = document.querySelector('.cube-container');
+    const heroImage = document.querySelector('.hero-image');
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+    let rotation = { x: -15, y: -15 };
+    let autoRotateTimeout;
+    let isAutoRotating = false;
+
+    // Initialize cube rotation
+    if (cubeContainer) {
+        cubeContainer.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
+        
+        // Mouse events for desktop
+        heroImage.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDrag);
+
+        // Touch events for mobile
+        heroImage.addEventListener('touchstart', startDragTouch);
+        document.addEventListener('touchmove', dragTouch);
+        document.addEventListener('touchend', stopDrag);
+
+        // Prevent context menu on cube
+        heroImage.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
+
+    function startDrag(e) {
+        isDragging = true;
+        previousMousePosition = {
+            x: e.clientX,
+            y: e.clientY
+        };
+        heroImage.classList.add('dragging');
+        e.preventDefault();
+        stopAutoRotation();
+    }
+
+    function startDragTouch(e) {
+        if (e.touches.length === 1) {
+            isDragging = true;
+            previousMousePosition = {
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY
+            };
+            heroImage.classList.add('dragging');
+            e.preventDefault();
+            stopAutoRotation();
+        }
+    }
+
+    function drag(e) {
+        if (!isDragging) return;
+
+        const deltaX = e.clientX - previousMousePosition.x;
+        const deltaY = e.clientY - previousMousePosition.y;
+
+        // Update rotation based on mouse movement
+        rotation.y += deltaX * 0.5;
+        rotation.x -= deltaY * 0.5;
+
+        // Limit vertical rotation to prevent flipping
+        rotation.x = Math.max(-90, Math.min(90, rotation.x));
+
+        // Apply rotation to cube
+        cubeContainer.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
+
+        // Update previous mouse position
+        previousMousePosition.x = e.clientX;
+        previousMousePosition.y = e.clientY;
+    }
+
+    function dragTouch(e) {
+        if (!isDragging || e.touches.length !== 1) return;
+        
+        const deltaX = e.touches[0].clientX - previousMousePosition.x;
+        const deltaY = e.touches[0].clientY - previousMousePosition.y;
+
+        rotation.y += deltaX * 0.5;
+        rotation.x -= deltaY * 0.5;
+        rotation.x = Math.max(-90, Math.min(90, rotation.x));
+
+        cubeContainer.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
+
+        previousMousePosition.x = e.touches[0].clientX;
+        previousMousePosition.y = e.touches[0].clientY;
+        
+        e.preventDefault();
+    }
+
+    function stopDrag() {
+        isDragging = false;
+        heroImage.classList.remove('dragging');
+        resetAutoRotateTimeout();
+    }
+
+    // Auto-rotation functions
+    function startAutoRotation() {
+        if (!isDragging && !isAutoRotating) {
+            isAutoRotating = true;
+            rotation.y += 0.3;
+            rotation.x += 0.15;
+            cubeContainer.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`;
+            requestAnimationFrame(startAutoRotation);
+        } else {
+            isAutoRotating = false;
+        }
+    }
+
+    function stopAutoRotation() {
+        isAutoRotating = false;
+    }
+
+    function resetAutoRotateTimeout() {
+        clearTimeout(autoRotateTimeout);
+        autoRotateTimeout = setTimeout(() => {
+            if (!isDragging) {
+                startAutoRotation();
+            }
+        }, 3000);
+    }
+
+    // Start auto-rotation initially
+    resetAutoRotateTimeout();
+
+    // Track user interaction to pause auto-rotation
+    document.addEventListener('mousedown', resetAutoRotateTimeout);
+    document.addEventListener('touchstart', resetAutoRotateTimeout);
+    document.addEventListener('mousemove', resetAutoRotateTimeout);
+    document.addEventListener('touchmove', resetAutoRotateTimeout);
+
+    // ======================
+    // MOBILE NAVIGATION MENU (UPDATED FROM FIRST FILE)
     // ======================
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mainNav = document.getElementById('main-nav');
@@ -329,4 +462,11 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         document.head.appendChild(style);
     }
+
+    // Image error handling
+    document.querySelectorAll('.cube-face img').forEach(img => {
+        img.onerror = function() {
+            console.warn('Failed to load image:', this.src);
+        };
+    });
 });
